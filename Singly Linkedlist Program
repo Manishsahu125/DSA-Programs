@@ -1,0 +1,203 @@
+public class Main
+{
+    public Node head;
+    public class Node{
+        int data;
+        Node next;
+        
+        Node(int data){
+            this.data = data;
+            this.next = null;
+            
+        }
+    }
+    public void insertatfirst(int data){
+        Node newnode = new Node(data);
+        if(head == null){
+            head = newnode;
+            return;
+        }
+        newnode.next = head;
+        head = newnode;
+        
+    }
+    public void insertatlast(int data){
+        Node newnode = new Node(data);
+        Node temp = head;
+        
+        if(head == null){
+            head = newnode;
+            return;
+        }
+        while(temp.next!=null){
+            temp = temp.next;
+        }
+        temp.next = newnode;
+    }
+    
+    public void insertatmiddle(int data){
+        Node newnode = new Node(data);
+        Node temp = head;
+        Node curr = head;
+        int c = 0;
+        int t=1;
+        while(temp!= null){
+            temp  = temp.next;
+            c++;
+        }
+        while(t!=(c/2)){
+            curr = curr.next;
+            t++;
+        }
+        newnode.next = curr.next;
+        curr.next = newnode;
+        
+    }
+    public void insertatposition(int data,int position){
+        Node newnode = new Node(data);
+        Node temp;
+        if(position == 1){
+            newnode.next = head;
+            head = newnode;
+        }
+        else{
+            temp = head;
+            int count = 1;
+            while(count<position-1){
+                temp = temp.next;
+                count++;
+                
+            }
+            newnode.next = temp.next;
+            temp.next = newnode;
+        }
+    }
+    // 4 5 6 7
+    public void deleteatfirst(){
+        if(head == null){
+            System.out.println("linkedlist is empty");
+        }
+        head = head.next;
+    }
+    public void deleteatlatlast(){
+        Node temp=head;
+        Node prev=null;
+        if(head == null){
+            System.out.println("linkedlist is empty");
+        }
+        while(temp.next!=null){
+            prev = temp;
+            temp = temp.next;
+        }
+        prev.next = null ;
+    }
+    public void deleteatlatposition(int position){
+        Node temp=head;
+        Node prev=null;
+        if(head == null){
+            System.out.println("linkedlist is empty");
+        }
+        int c=1;
+        if(position==1){
+            System.out.println("delete element is"+head.data);
+        }
+        while(c<position){
+            prev = temp;
+            temp = temp.next;
+            c++;
+        }
+        prev.next = temp.next;
+        
+    }
+    public void search(int data){
+        Node temp = head;
+        if(head == null){
+            System.out.println("linkedlist is empty");
+        }
+        while(temp.next !=null){
+            if(temp.data == data){
+                System.out.println("The number is present in this linkedlist");
+                return;
+            }
+            temp = temp.next;
+        }
+        System.out.println("number is not present");
+    }
+    public void searchatposition(int position){
+        Node temp = head;
+        if(head == null){
+            System.out.println("linkedlist is empty");
+        }
+        int c = 1;
+        while(c<position){
+            temp = temp.next;
+            c++;
+        }
+        System.out.println(temp.data);
+    }
+    //4 5 6 7 8 9
+    public void display(){
+        Node temp = head;
+        if(head == null){
+            System.out.println("linkedlist is empty");
+        }
+        while(temp!= null){
+            System.out.print(temp.data+"->");
+            temp = temp.next;
+        }
+        if(head!=null){
+        System.out.print("Null");}
+        
+    }
+    public void reverse(){
+        Node temp = head;
+        Node prev = null;
+        Node next  = null;
+        while(temp!= null){
+            next = temp.next;
+            temp.next = prev;
+            prev= temp;
+            temp  = next;
+        }
+        head = prev;
+    }
+   public void sort(){
+       Node Curr = head;
+       int temp;
+    if(head == null){
+        System.out.println("linked list is empty");
+    }
+    while(Curr!= null){
+        Node j = Curr.next;
+        while(j!=null){
+            if(Curr.data>j.data){
+            temp = Curr.data;
+            Curr.data= j.data;
+            j.data = temp;
+            }
+            j = j.next;
+        }
+        Curr = Curr.next;
+    }
+       
+   }
+    //30 4 5 25 10 20 
+	public static void main(String[] args) {
+		Main mani = new Main();
+		mani.insertatlast(4);
+		mani.insertatlast(5);
+		mani.insertatlast(10);
+		mani.insertatlast(20);
+		mani.insertatmiddle(25);
+		mani.insertatposition(30,2);
+		//mani.deleteatfirst();
+		//mani.deleteatlatlast();
+		//mani.deleteatlatposition(3);
+		mani.display();
+		mani.reverse();
+		mani.display();
+		mani.sort();
+		mani.display();
+		
+	}
+}
